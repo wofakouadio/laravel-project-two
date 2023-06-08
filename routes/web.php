@@ -22,6 +22,10 @@ Route::get("/blog/create", [BlogController::class, 'create'])->middleware('auth'
 Route::post('/blog/new', [BlogController::class, 'store'])->middleware('auth');
 //display all user blog
 Route::get('/blog/manage', [BlogController::class, 'manage'])->middleware('auth');
+//show edit blog for authenticated user
+Route::get('/blog/{blog}/edit', [BlogController::class, 'edit'])->middleware('auth');
+//Update blog for authenticated user
+Route::put('/blog/{blog}', [BlogController::class, 'update'])->middleware('auth');
 //show single blog
 Route::get('/blog/{blog}', [BlogController::class, 'show']);
 

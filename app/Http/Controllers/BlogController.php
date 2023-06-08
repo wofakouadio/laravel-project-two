@@ -58,8 +58,42 @@ class BlogController extends Controller
     //Manage blog view
     public function manage(){
         return view('/blog/manage', [
-            'blogs'=>Auth::user()->blogs()->get()
+            'blogs'=>Auth::user()->blogs()->paginate(2)
         ]);
+    }
+
+    //show edit blog
+    public function edit(Blogs $blog){
+        return view('blog.edit', [
+           'blog' => $blog,
+            'blogs'=>Auth::user()->blogs()->paginate()
+        ]);
+    }
+
+    //Update blog
+    public function update(Request $request, Blogs $blog){
+        if($blog->user_id != Auth::user()->id){
+            abort(403, 'Unauthorized action');
+        }
+        $UpdateBlogForm = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'category' => 'required',
+            'tags' => 'required'
+        ]);
+
+        if($request->hasFile('img')){
+            $UpdateBlogForm['img'] = $request->file('img')->store('img', 'public');
+        }
+        if($blog->update($UpdateBlogForm)){
+            toastr()->success('Blog updated successfully', 'Blog Notification');
+            return redirect('/blog/manage');
+        }
+        else{
+            toastr()->error('Blog failed to be created', 'Blog Notification');
+            return back();
+        }
+
     }
 
 }
