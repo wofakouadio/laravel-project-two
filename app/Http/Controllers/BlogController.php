@@ -51,14 +51,15 @@ class BlogController extends Controller
     //show a single blog
     public function show(Blogs $blog){
         return view('blog.show', [
-            'blog' => $blog
+            'blog' => $blog,
+            'blogs' => Blogs::latest()->paginate(5)
         ]);
     }
 
     //Manage blog view
     public function manage(){
         return view('/blog/manage', [
-            'blogs'=>Auth::user()->blogs()->paginate(2)
+            'blogs'=>Auth::user()->blogs()->paginate(10)
         ]);
     }
 
@@ -66,7 +67,7 @@ class BlogController extends Controller
     public function edit(Blogs $blog){
         return view('blog.edit', [
            'blog' => $blog,
-            'blogs'=>Auth::user()->blogs()->paginate()
+            'blogs'=>Auth::user()->blogs()->paginate(8)
         ]);
     }
 

@@ -35,9 +35,14 @@ Route::get('/blog/{blog}', [BlogController::class, 'show']);
 /**
  * Users Route
  */
+//display registration form
 Route::get('/register', [UserController::class, 'register'])->middleware('guest');
+//display login form
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
+//logout authenticated user
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+//register new user
 Route::post('/users/registration', [UserController::class, 'store']);
+//authenticate user
 Route::post('/users/authentication', [UserController::class, 'authenticate']);
 
