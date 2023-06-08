@@ -11,7 +11,7 @@ class BlogController extends Controller
     //load all blog posts
     public function index(){
         return view('blog.index',
-            ['blogs' => Blogs::latest()->paginate(8)]
+            ['blogs' => Blogs::latest()->filter(request(['search', 'tag', 'category']))->paginate(8)]
         );
     }
 
@@ -48,8 +48,10 @@ class BlogController extends Controller
     }
 
     //show a single blog
-    public function show(){
-        return view('blog.show');
+    public function show(Blogs $blog){
+        return view('blog.show', [
+            'blog' => $blog
+        ]);
     }
 
 
