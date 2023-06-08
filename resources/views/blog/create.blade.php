@@ -44,6 +44,7 @@
                             <div class="form-group">
                                 <label>Category</label>
                                 <select name="category" class="form-control form-control-lg">
+                                    @if(old('category') != '')
                                     <option value="">Choose</option>
                                     <option value="{{old('category')}}" selected>{{old('category')}}</option>
                                     <option value="General">General</option>
@@ -53,6 +54,16 @@
                                     <option value="Music">Music</option>
                                     <option value="Movies">Movies</option>
                                     <option value="IT">IT</option>
+                                    @else
+                                        <option value="">Choose</option>
+                                        <option value="General">General</option>
+                                        <option value="Religion">Religion</option>
+                                        <option value="Politics">Politics</option>
+                                        <option value="Entertainment">Entertainment</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Movies">Movies</option>
+                                        <option value="IT">IT</option>
+                                    @endif
                                 </select>
                                 @error('category')
                                     <p class="badge badge-danger">{{$message}}</p>
@@ -90,7 +101,6 @@
                                                     <img src="{{ asset('storage/'.$blog->img)}}" alt="user" /></div>
                                                 <div class="el-card-content">
                                                     <h5 class="m-b-0">{{$blog->title}}</h5>
-                                                    <a class="btn btn-primary btn-outline el-link" href="/blog/{{$blog->id}}/show"><i class="mdi mdi-link"></i></a>
                                                 </div>
                                             </div>
                                         </div>
