@@ -96,4 +96,19 @@ class BlogController extends Controller
 
     }
 
+    //delete blog
+    public function destroy(blogs $blog){
+        if($blog->user_id != Auth::user()->id){
+            abort(403, 'Unauthorized action');
+        }
+        if($blog->delete()){
+            toastr()->success('Blog deleted successfully', 'Blog Notification');
+            return redirect('/blog/manage');
+        }
+        else{
+            toastr()->error('Blog failed to be created', 'Blog Notification');
+            return back();
+        }
+    }
+
 }

@@ -26,6 +26,8 @@ Route::get('/blog/manage', [BlogController::class, 'manage'])->middleware('auth'
 Route::get('/blog/{blog}/edit', [BlogController::class, 'edit'])->middleware('auth');
 //Update blog for authenticated user
 Route::put('/blog/{blog}', [BlogController::class, 'update'])->middleware('auth');
+//Delete blog for authenticated user
+Route::delete('/blog/{blog}', [BlogController::class, 'destroy'])->middleware('auth');
 //show single blog
 Route::get('/blog/{blog}', [BlogController::class, 'show']);
 
