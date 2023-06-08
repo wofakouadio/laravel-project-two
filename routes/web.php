@@ -21,7 +21,7 @@ Route::get("/blog/create", [BlogController::class, 'create'])->middleware('auth'
 //submit new blog
 Route::post('/blog/new', [BlogController::class, 'store'])->middleware('auth');
 //show single blog
-Route::get('/blog/show', [BlogController::class, 'show']);
+Route::get('/blog/{blog}', [BlogController::class, 'show']);
 
 
 /**
