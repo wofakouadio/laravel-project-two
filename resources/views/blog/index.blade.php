@@ -1,6 +1,7 @@
 <x-blog-body>
     <x-page-title/>
-    <div class="container-fluid my-5">
+    @include('partials._search')
+    <div class="container-fluid">
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
@@ -13,7 +14,7 @@
                             <div class="el-card-avatar el-overlay-1"> <img src="{{asset('storage/'.$blog->img)}}" alt="user" /></div>
                             <div class="el-card-content">
                                 <h5 class="m-b-0">{{$blog->title}}</h5>
-                                <a class="btn btn-primary btn-outline el-link" href="/blog/{{$blog->id}}/show"><i class="mdi mdi-link"></i></a>
+                                <a class="btn btn-primary btn-outline el-link" href="/blog/{{$blog->id}}"><i class="mdi mdi-link"></i></a>
                             </div>
                         </div>
                     </div>
