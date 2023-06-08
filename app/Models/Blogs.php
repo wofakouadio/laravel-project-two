@@ -14,7 +14,7 @@ class Blogs extends Model
         'content',
         'category',
         'tags',
-        'author_id',
+        'user_id',
         'author_name',
         'img'
     ];
@@ -60,5 +60,10 @@ class Blogs extends Model
                 '%'.request('category').'%'
             );
         }
+    }
+
+    //relationship between blogs and user
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

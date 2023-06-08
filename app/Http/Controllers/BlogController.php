@@ -18,7 +18,8 @@ class BlogController extends Controller
     //display blog post creation
     public function create(){
         return view('blog.create',
-            ['blogs' => Blogs::latest()->paginate(8)]
+//            ['blogs' => Blogs::latest()->paginate(8)]
+            ['blogs'=>Auth::user()->blogs()->paginate(8)]
         );
     }
 
@@ -31,7 +32,7 @@ class BlogController extends Controller
             'tags' => 'required',
             'img' => 'required|mimes:png,jpg,jpeg'
         ]);
-        $NewBlogForm['author_id'] = Auth::user()->id;
+        $NewBlogForm['user_id'] = Auth::user()->id;
         $NewBlogForm['author_name'] = Auth::user()->fullname;
         if($request->hasFile('img')){
             $NewBlogForm['img'] = $request->file('img')->store('img', 'public');
@@ -54,5 +55,11 @@ class BlogController extends Controller
         ]);
     }
 
+    //Manage blog view
+    public function manage(){
+        return view('/blog/manage', [
+            'blogs'=>Auth::user()->blogs()->get()
+        ]);
+    }
 
 }

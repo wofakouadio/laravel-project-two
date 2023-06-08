@@ -20,6 +20,8 @@ Route::get('/', [BlogController::class, 'index']);
 Route::get("/blog/create", [BlogController::class, 'create'])->middleware('auth');
 //submit new blog
 Route::post('/blog/new', [BlogController::class, 'store'])->middleware('auth');
+//display all user blog
+Route::get('/blog/manage', [BlogController::class, 'manage'])->middleware('auth');
 //show single blog
 Route::get('/blog/{blog}', [BlogController::class, 'show']);
 
