@@ -21,8 +21,7 @@ class BlogsFactory extends Factory
             'content' =>fake()->paragraph(10),
             'category' => 'General',
             'tags' => 'test, unit, IT, vg',
-            'author' => 'John Doe',
-            'datetime' => fake()->date()
+            'author' => 'John Doe'
         ];
     }
 }

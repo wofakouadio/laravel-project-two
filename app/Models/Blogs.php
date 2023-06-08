@@ -14,7 +14,8 @@ class Blogs extends Model
         'content',
         'category',
         'tags',
-        'author',
-        'datetime'
+        'author_id',
+        'author_name',
+        'img'
     ];
 }

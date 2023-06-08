@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('img')->nullable();
+            $table->string('img');
             $table->longText('content');
             $table->string('category');
             $table->string('tags');
-            $table->string('author')->nullable();
-            $table->date('datetime');
+            $table->bigInteger('author_id');
+            $table->string('author_name');
             $table->timestamps();
         });
     }

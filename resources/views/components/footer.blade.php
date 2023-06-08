@@ -17,3 +17,4 @@
 <!-- this page js -->
 <script src="{{asset('assets/libs/magnific-popup/dist/jquery.magnific-popup.min.js')}}"></script>
 <script src="{{asset('assets/libs/magnific-popup/meg.init.js')}}"></script>
+<script src="{{asset('assets/libs/toastr/build/toastr.min.js')}}"></script>

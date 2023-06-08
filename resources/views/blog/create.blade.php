@@ -1,8 +1,5 @@
 
-<x-layout-home>
-    <x-slot:header_one>
-        <x-header-one/>
-    </x-slot>
+<x-blog-body>
 
         <div class="page-breadcrumb mb-3">
             <div class="row">
@@ -28,21 +25,27 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-4 col-md-6">
-                        <form class="form-group" method="post" action="/blog/addnew" enctype="multipart/form-data">
+                        <form class="form-group" method="post" action="/blog/new" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label>Title</label>
                                 <input type="text" name="title" class="form-control form-control-lg" value="{{old('title')}}"/>
+                                @error('title')
+                                    <p class="badge badge-danger">{{$message}}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Content</label>
                                 <textarea name="content" class="form-control form-control-lg" cols="10" rows="5">{{old('content')}}</textarea>
+                                @error('content')
+                                    <p class="badge badge-danger">{{$message}}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Category</label>
                                 <select name="category" class="form-control form-control-lg">
                                     <option value="">Choose</option>
-                                    {{old('category')}}
+                                    <option value="{{old('category')}}" selected>{{old('category')}}</option>
                                     <option value="General">General</option>
                                     <option value="Religion">Religion</option>
                                     <option value="Politics">Politics</option>
@@ -50,16 +53,24 @@
                                     <option value="Music">Music</option>
                                     <option value="Movies">Movies</option>
                                     <option value="IT">IT</option>
-
                                 </select>
+                                @error('category')
+                                    <p class="badge badge-danger">{{$message}}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Tags</label>
                                 <input type="text" name="tags" class="form-control form-control-lg" value="{{old('tags')}}"/>
+                                @error('tags')
+                                    <p class="badge badge-danger">{{$message}}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Featured Image</label>
                                 <input type="file" name="img" class="form-control form-control-lg"/>
+                                @error('img')
+                                    <p class="badge badge-danger">{{$message}}</p>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary waves-effect waves-dark">Create</button>
@@ -67,12 +78,36 @@
                         </form>
                     </div>
                     <div class="col-lg-8 col-md-6">
+{{--                        @props(['blog'])--}}
                         <h5>My blogs</h5>
+                        @if(count($blogs) != 0)
+                            <div class="row el-element-overlay">
+                                @foreach($blogs as $blog)
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="card">
+                                            <div class="el-card-item">
+                                                <div class="el-card-avatar el-overlay-1">
+                                                    <img src="{{ asset('storage/'.$blog->img)}}" alt="user" /></div>
+                                                <div class="el-card-content">
+                                                    <h5 class="m-b-0">{{$blog->title}}</h5>
+                                                    <a class="btn btn-primary btn-outline el-link" href="/blog/{{$blog->id}}/show"><i class="mdi mdi-link"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <h4>No Blog found</h4>
+                        @endif
+                        <div class="mt-6 p-4">
+                            {{$blogs->links()}}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-</x-layout-home>
+</x-blog-body>
 
