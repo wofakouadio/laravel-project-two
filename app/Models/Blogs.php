@@ -18,4 +18,47 @@ class Blogs extends Model
         'author_name',
         'img'
     ];
+
+    //    Search blog scope//
+    public function scopeFilter($query, array $filters){
+        //search on index
+        if($filters['search'] ?? false){
+            $query->where(
+                'title',
+                'LIKE',
+                '%'.request('search').'%'
+            )->orWhere(
+                'content',
+                'LIKE',
+                '%'.request('search').'%'
+            )->orWhere(
+                'category',
+                'LIKE',
+                '%'.request('search').'%'
+            )->orWhere(
+                'tags',
+                'LIKE',
+                '%'.request('search').'%'
+            )->orWhere(
+                'author_name',
+                'LIKE',
+                '%'.request('search').'%'
+            );
+        }
+        if($filters['tag'] ?? false){
+            $query->Where(
+                'tags',
+                'LIKE',
+                '%'.request('tag').'%'
+            );
+        }
+
+        if($filters['category'] ?? false){
+            $query->Where(
+                'category',
+                'LIKE',
+                '%'.request('category').'%'
+            );
+        }
+    }
 }
